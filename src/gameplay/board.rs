@@ -1,6 +1,9 @@
 use crate::prelude::*;
 
-use super::paddles::{PaddleType, SpawnPaddle};
+use super::{
+    bg::SpawnBg,
+    paddles::{PaddleType, SpawnPaddle},
+};
 
 pub(super) fn plugin(app: &mut App) {
     app.add_systems(Update, draw_game.in_set(UpdateSet::Draw));
@@ -9,14 +12,16 @@ pub(super) fn plugin(app: &mut App) {
 pub fn spawn_board(world: &mut World) {
     let padding: f32 = 10.;
 
+    SpawnBg.apply(world);
+
     SpawnPaddle {
-        x: -(GAME_W / 2.) + padding,
+        x: 0. + padding,
         paddle_type: PaddleType::Player,
     }
     .apply(world);
 
     SpawnPaddle {
-        x: (GAME_W / 2.) - padding,
+        x: GAME_W - padding,
         paddle_type: PaddleType::Ai,
     }
     .apply(world);

@@ -16,10 +16,12 @@ fn spawn_paddle(
     let material = materials.add(ColorMaterial::from_color(color));
 
     commands.spawn((
+        Name::new("Paddle"),
         config.paddle_type,
-        Position(Vec2::new(config.x, 0.)),
+        Position(Vec2::new(config.x, GAME_H / 2.)),
         Mesh2d(shape.clone()),
         MeshMaterial2d(material.clone()),
+        StateScoped(Screen::Game),
     ));
 }
 
