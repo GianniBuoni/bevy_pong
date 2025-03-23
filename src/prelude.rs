@@ -1,6 +1,12 @@
 pub(crate) use bevy::prelude::*;
 
 // module preludes
+pub(crate) use crate::gameplay::prelude::*;
+pub(crate) use crate::screens::prelude::*;
+
+// global constatns
+pub(crate) const GAME_W: f32 = 640.;
+pub(crate) const GAME_H: f32 = 360.;
 
 // global macro for quick entity getting
 #[macro_export]
@@ -19,4 +25,5 @@ pub(crate) enum UpdateSet {
     Tickers,
     RecordInput,
     Update,
+    Draw,
 }

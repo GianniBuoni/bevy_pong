@@ -1,12 +1,11 @@
 use bevy::render::camera::ScalingMode::AutoMin;
 
 use crate::prelude::*;
+mod gameplay;
 mod prelude;
+mod screens;
 
 pub struct AppPlugin;
-
-const GAME_W: f32 = 640.;
-const GAME_H: f32 = 360.;
 
 impl bevy::app::Plugin for AppPlugin {
     fn build(&self, app: &mut App) {
@@ -31,7 +30,8 @@ impl bevy::app::Plugin for AppPlugin {
                     ..default()
                 })
                 .set(ImagePlugin::default_nearest()),
-        );
+        )
+        .add_plugins((gameplay::plugin, screens::plugin));
     }
 }
 
