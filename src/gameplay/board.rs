@@ -1,6 +1,7 @@
 use crate::prelude::*;
 
 use super::{
+    ball::SpawnBall,
     bg::SpawnBg,
     paddles::{PaddleType, SpawnPaddle},
 };
@@ -25,6 +26,8 @@ pub fn spawn_board(world: &mut World) {
         paddle_type: PaddleType::Ai,
     }
     .apply(world);
+
+    SpawnBall.apply(world);
 }
 
 fn draw_game(mut query: Query<(&mut Transform, &Position, &ZIndex)>) {

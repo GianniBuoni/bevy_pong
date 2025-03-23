@@ -4,6 +4,7 @@ pub(crate) mod prelude {
     pub(crate) use super::board::spawn_board;
 }
 
+mod ball;
 mod bg;
 mod board;
 mod paddles;
