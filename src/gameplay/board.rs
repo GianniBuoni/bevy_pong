@@ -3,6 +3,7 @@ use crate::prelude::*;
 use super::{
     ball::SpawnBall,
     bg::SpawnBg,
+    gutters::{GuttersSide, SpawnGutter},
     paddles::{PaddleType, SpawnPaddle},
 };
 
@@ -11,19 +12,29 @@ pub(super) fn plugin(app: &mut App) {
 }
 
 pub fn spawn_board(world: &mut World) {
-    let padding: f32 = 10.;
-
     SpawnBg.apply(world);
 
     SpawnPaddle {
-        x: 0. + padding,
+        x: 0.,
         paddle_type: PaddleType::Player,
     }
     .apply(world);
 
     SpawnPaddle {
-        x: GAME_W - padding,
+        x: GAME_W,
         paddle_type: PaddleType::Ai,
+    }
+    .apply(world);
+
+    SpawnGutter {
+        y: GAME_H,
+        side: GuttersSide::Top,
+    }
+    .apply(world);
+
+    SpawnGutter {
+        y: 0.,
+        side: GuttersSide::Bottom,
     }
     .apply(world);
 

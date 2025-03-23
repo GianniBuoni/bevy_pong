@@ -20,7 +20,8 @@ fn spawn_ball(
         StateScoped(Screen::Game),
         RigidBody::Dynamic,
         Collider::circle(radius),
-        LinearVelocity(Vec2::new(50., 50.)),
+        LinearVelocity(Vec2::new(-90., -90.)),
+        Restitution::new(1.),
         ZIndex(1),
     ));
 }

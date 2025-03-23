@@ -8,10 +8,17 @@ fn spawn_paddle(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
 ) {
-    let shape = meshes.add(Rectangle::new(10., 60.));
+    let (w, h) = (10., 60.);
+    let padding: f32 = 10.;
+
+    let shape = meshes.add(Rectangle::new(w, h));
     let color = match config.paddle_type {
         PaddleType::Player => Color::srgb(0., 1., 0.),
         PaddleType::Ai => Color::srgb(1., 0., 0.),
+    };
+    let x = match config.paddle_type {
+        PaddleType::Player => config.x + padding,
+        PaddleType::Ai => config.x - padding,
     };
     let material = materials.add(ColorMaterial::from_color(color));
 
@@ -19,9 +26,9 @@ fn spawn_paddle(
         Name::new("Paddle"),
         Paddle,
         config.paddle_type,
-        Position(Vec2::new(config.x, GAME_H / 2.)),
+        Position(Vec2::new(x, GAME_H / 2.)),
         RigidBody::Kinematic,
-        Collider::rectangle(10., 60.),
+        Collider::rectangle(w, h),
         Mesh2d(shape.clone()),
         MeshMaterial2d(material.clone()),
         StateScoped(Screen::Game),

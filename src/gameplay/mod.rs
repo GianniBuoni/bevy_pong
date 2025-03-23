@@ -9,6 +9,7 @@ pub(crate) mod prelude {
 mod ball;
 mod bg;
 mod board;
+mod gutters;
 mod paddles;
 
 pub(super) fn plugin(app: &mut App) {
