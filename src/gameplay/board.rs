@@ -7,7 +7,12 @@ use super::{
 };
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_systems(Update, draw_game.in_set(UpdateSet::Draw));
+    app.add_systems(
+        Update,
+        draw_game
+            .in_set(UpdateSet::Draw)
+            .run_if(in_state(Gameplay::InPlay)),
+    );
 }
 
 pub fn spawn_board(world: &mut World) {
