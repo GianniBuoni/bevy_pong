@@ -16,6 +16,7 @@ fn spawn_bg(
         Mesh2d(shape.clone()),
         MeshMaterial2d(color.clone()),
         StateScoped(Screen::Game),
+        ZIndex(0),
     ));
 }
 

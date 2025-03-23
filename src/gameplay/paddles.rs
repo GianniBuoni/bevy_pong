@@ -10,20 +10,25 @@ fn spawn_paddle(
 ) {
     let shape = meshes.add(Rectangle::new(10., 60.));
     let color = match config.paddle_type {
-        PaddleType::Player => Color::WHITE,
+        PaddleType::Player => Color::srgb(0., 1., 0.),
         PaddleType::Ai => Color::srgb(1., 0., 0.),
     };
     let material = materials.add(ColorMaterial::from_color(color));
 
     commands.spawn((
         Name::new("Paddle"),
+        Paddle,
         config.paddle_type,
         Position(Vec2::new(config.x, GAME_H / 2.)),
         Mesh2d(shape.clone()),
         MeshMaterial2d(material.clone()),
         StateScoped(Screen::Game),
+        ZIndex(1),
     ));
 }
+
+#[derive(Component)]
+pub(super) struct Paddle;
 
 #[derive(Component)]
 pub(super) enum PaddleType {

@@ -27,9 +27,9 @@ pub fn spawn_board(world: &mut World) {
     .apply(world);
 }
 
-fn draw_game(mut query: Query<(&mut Transform, &Position)>) {
-    for (mut transform, pos) in &mut query {
-        transform.translation = pos.0.extend(0.);
+fn draw_game(mut query: Query<(&mut Transform, &Position, &ZIndex)>) {
+    for (mut transform, pos, z_index) in &mut query {
+        transform.translation = pos.0.extend(z_index.0 as f32);
     }
 }
 
