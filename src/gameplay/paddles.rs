@@ -20,6 +20,8 @@ fn spawn_paddle(
         Paddle,
         config.paddle_type,
         Position(Vec2::new(config.x, GAME_H / 2.)),
+        RigidBody::Kinematic,
+        Collider::rectangle(10., 60.),
         Mesh2d(shape.clone()),
         MeshMaterial2d(material.clone()),
         StateScoped(Screen::Game),

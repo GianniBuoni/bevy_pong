@@ -1,11 +1,12 @@
 [package]
-name = "pong_rapier"
+name = "pong_avian"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 bevy = { version = "0.15.3", features = ["wayland", "dynamic_linking"] }
 bevy_ecs_ldtk = "0.11.0"
+avian2d = { version = "0.2", features = ["debug-plugin"] }
 # Use instead for a release build
 # bevy = "0.15.3"
 

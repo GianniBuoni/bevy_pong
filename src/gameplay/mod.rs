@@ -4,7 +4,6 @@ use crate::prelude::*;
 
 pub(crate) mod prelude {
     pub(crate) use super::board::spawn_board;
-    pub(crate) use super::Gameplay;
 }
 
 mod ball;
@@ -36,7 +35,7 @@ fn toggle_game_state(
 
 #[derive(States, Clone, Debug, Default, Hash, PartialEq, Eq)]
 pub(super) enum Gameplay {
-    Paused,
     #[default]
     InPlay,
+    Paused,
 }

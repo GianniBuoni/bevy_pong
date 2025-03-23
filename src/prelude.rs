@@ -1,3 +1,4 @@
+pub(crate) use avian2d::prelude::*;
 pub(crate) use bevy::prelude::*;
 
 // module preludes
@@ -25,5 +26,4 @@ pub(crate) enum UpdateSet {
     Tickers,
     RecordInput,
     Update,
-    Draw,
 }

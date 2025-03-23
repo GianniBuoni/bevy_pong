@@ -7,12 +7,7 @@ use super::{
 };
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_systems(
-        Update,
-        draw_game
-            .in_set(UpdateSet::Draw)
-            .run_if(in_state(Gameplay::InPlay)),
-    );
+    app.add_systems(Startup, init_game);
 }
 
 pub fn spawn_board(world: &mut World) {
@@ -35,7 +30,9 @@ pub fn spawn_board(world: &mut World) {
     SpawnBall.apply(world);
 }
 
-fn draw_game(mut query: Query<(&mut Transform, &Position, &ZIndex)>) {
+fn init_game(
+    mut query: Query<(&mut Transform, &Position, &ZIndex), Added<Position>>,
+) {
     for (mut transform, pos, z_index) in &mut query {
         transform.translation = pos.0.extend(z_index.0 as f32);
     }

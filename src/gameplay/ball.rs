@@ -7,7 +7,8 @@ fn spawn_ball(
     mut materials: ResMut<Assets<ColorMaterial>>,
     mut commands: Commands,
 ) {
-    let shape = meshes.add(Circle::new(5.));
+    let radius: f32 = 5.;
+    let shape = meshes.add(Circle::new(radius));
     let color = materials.add(Color::WHITE);
 
     commands.spawn((
@@ -17,6 +18,9 @@ fn spawn_ball(
         MeshMaterial2d(color.clone()),
         Position(Vec2::new(GAME_W / 2., GAME_H / 2.)),
         StateScoped(Screen::Game),
+        RigidBody::Dynamic,
+        Collider::circle(radius),
+        LinearVelocity(Vec2::new(50., 50.)),
         ZIndex(1),
     ));
 }

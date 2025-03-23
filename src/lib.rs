@@ -2,6 +2,7 @@ use bevy::render::camera::ScalingMode::AutoMin;
 
 use crate::prelude::*;
 mod gameplay;
+mod physics;
 mod prelude;
 mod screens;
 
@@ -17,9 +18,9 @@ impl bevy::app::Plugin for AppPlugin {
                 UpdateSet::Update,
             )
                 .chain(),
-        )
-        .add_systems(Startup, spawn_camera)
-        .add_plugins(
+        );
+        app.add_systems(Startup, spawn_camera);
+        app.add_plugins(
             DefaultPlugins
                 .set(WindowPlugin {
                     primary_window: Window {
@@ -30,8 +31,8 @@ impl bevy::app::Plugin for AppPlugin {
                     ..default()
                 })
                 .set(ImagePlugin::default_nearest()),
-        )
-        .add_plugins((gameplay::plugin, screens::plugin));
+        );
+        app.add_plugins((gameplay::plugin, physics::plugin, screens::plugin));
     }
 }
 
