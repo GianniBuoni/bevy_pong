@@ -3,8 +3,8 @@ use crate::prelude::*;
 use super::{
     ball::{Ball, SpawnBall},
     paddles::PaddleType,
+    pause::Gameplay,
     scoring::RecordScore,
-    Gameplay,
 };
 
 pub(super) fn plugin(app: &mut App) {
@@ -45,7 +45,7 @@ fn check_for_reset(
     let (ball, position) = get_single!(ball);
 
     if position.0.x <= 0. || position.0.x >= GAME_W {
-        info!("Triggering reset!");
+        info!("[observer triggered] Reset!");
         commands.trigger_targets(Reset, ball);
     }
 }

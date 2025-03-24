@@ -1,7 +1,36 @@
 use crate::prelude::*;
 
-use super::reset::reset_ball;
+use super::{
+    pause::{PauseEvent, UnpauseEvent},
+    reset::reset_ball,
+};
 
+pub(super) fn plugin(app: &mut App) {
+    app.add_observer(enable_ball_physics);
+    app.add_observer(disable_ball_physics);
+}
+
+// BALL EVENTS
+fn enable_ball_physics(
+    _trigger: Trigger<UnpauseEvent>,
+    ball: Query<Entity, With<Ball>>,
+    mut commnads: Commands,
+) {
+    let ball = get_single!(ball);
+    commnads.entity(ball).remove::<RigidBodyDisabled>();
+}
+
+fn disable_ball_physics(
+    _trigger: Trigger<PauseEvent>,
+    ball: Query<Entity, With<Ball>>,
+    mut commnads: Commands,
+) {
+    let ball = get_single!(ball);
+    info!("Stopping Ball");
+    commnads.entity(ball).insert(RigidBodyDisabled);
+}
+
+// SPAWN AND COMMAND IMPL
 fn spawn_ball(
     In(config): In<SpawnBall>,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -34,6 +63,7 @@ fn spawn_ball(
         .observe(reset_ball);
 }
 
+// COMPONENTS & RESOURCES
 #[derive(Component)]
 pub(super) struct Ball;
 

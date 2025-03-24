@@ -3,7 +3,7 @@ use crate::prelude::*;
 use super::{
     ball::Ball,
     paddles::{Height, PaddleType},
-    Gameplay,
+    pause::Gameplay,
 };
 
 pub(super) fn plugin(app: &mut App) {
