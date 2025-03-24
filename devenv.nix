@@ -11,9 +11,14 @@
       vulkan-loader
     ];
 
-  scripts.crr.exec = ''
-    cargo clippy && cargo run
-  '';
+  scripts = {
+    cr.exec = ''
+      cargo clippy && cargo run
+    '';
+    crr.exec = ''
+      cargo clippy && cargo run --release
+    '';
+  };
 
   languages.rust = {
     enable = true;

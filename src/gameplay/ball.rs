@@ -1,7 +1,5 @@
 use crate::prelude::*;
 
-use super::board::Position;
-
 fn spawn_ball(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
@@ -18,16 +16,19 @@ fn spawn_ball(
         MeshMaterial2d(color.clone()),
         Position(Vec2::new(GAME_W / 2., GAME_H / 2.)),
         StateScoped(Screen::Game),
+        LinearVelocity(Vec2::new(-150., -150.)),
         RigidBody::Dynamic,
         Collider::circle(radius),
-        LinearVelocity(Vec2::new(-90., -90.)),
+        //Collider options
         Restitution::new(1.),
+        Friction::new(0.),
+        ColliderDensity(2.),
         ZIndex(1),
     ));
 }
 
 #[derive(Component)]
-struct Ball;
+pub(super) struct Ball;
 
 pub(super) struct SpawnBall;
 

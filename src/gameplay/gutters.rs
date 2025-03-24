@@ -1,7 +1,5 @@
 use crate::prelude::*;
 
-use super::board::Position;
-
 pub(super) fn spawn_gutter(
     In(config): In<SpawnGutter>,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -21,6 +19,7 @@ pub(super) fn spawn_gutter(
         Mesh2d(mesh.clone()),
         RigidBody::Static,
         Collider::rectangle(w, h),
+        Friction::new(0.),
         Restitution::new(1.),
         ZIndex(0),
     ));

@@ -10,10 +10,11 @@ mod ball;
 mod bg;
 mod board;
 mod gutters;
+mod input;
 mod paddles;
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_plugins(board::plugin)
+    app.add_plugins((board::plugin, input::plugin))
         .init_state::<Gameplay>()
         .add_systems(
             Update,

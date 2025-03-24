@@ -1,7 +1,5 @@
 use crate::prelude::*;
 
-use super::board::Position;
-
 fn spawn_paddle(
     In(config): In<SpawnPaddle>,
     mut commands: Commands,
@@ -32,12 +30,20 @@ fn spawn_paddle(
         Mesh2d(shape.clone()),
         MeshMaterial2d(material.clone()),
         StateScoped(Screen::Game),
+        Friction::new(0.),
+        Restitution::new(1.1),
+        Height { h },
         ZIndex(1),
     ));
 }
 
 #[derive(Component)]
 pub(super) struct Paddle;
+
+#[derive(Component)]
+pub(super) struct Height {
+    pub h: f32,
+}
 
 #[derive(Component)]
 pub(super) enum PaddleType {

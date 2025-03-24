@@ -41,13 +41,8 @@ pub fn spawn_board(world: &mut World) {
     SpawnBall.apply(world);
 }
 
-fn init_game(
-    mut query: Query<(&mut Transform, &Position, &ZIndex), Added<Position>>,
-) {
-    for (mut transform, pos, z_index) in &mut query {
-        transform.translation = pos.0.extend(z_index.0 as f32);
+fn init_game(mut query: Query<(&mut Transform, &ZIndex), Added<ZIndex>>) {
+    for (mut transform, z_index) in &mut query {
+        transform.translation.z = z_index.0 as f32;
     }
 }
-
-#[derive(Component)]
-pub(super) struct Position(pub Vec2);

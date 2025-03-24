@@ -1,7 +1,5 @@
 use crate::prelude::*;
 
-use super::board::Position;
-
 fn spawn_bg(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<ColorMaterial>>,
