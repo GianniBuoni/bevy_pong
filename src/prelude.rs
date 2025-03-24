@@ -21,6 +21,19 @@ macro_rules! get_single {
 }
 pub(crate) use crate::get_single;
 
+#[macro_export]
+macro_rules! get_single_mut {
+    ($q:expr) => {
+        match $q.get_single_mut() {
+            Ok(m) => m,
+            _ => return,
+        }
+    };
+}
+
+#[allow(unused_imports)]
+pub(crate) use crate::get_single_mut;
+
 // global enum update sets
 #[derive(SystemSet, Clone, Copy, Debug, Hash, PartialEq, Eq)]
 pub(crate) enum UpdateSet {
