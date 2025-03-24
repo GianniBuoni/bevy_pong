@@ -25,7 +25,7 @@ fn paddle_input(
             PaddleType::Ai => {
                 let ball = get_single!(ball);
                 let a_to_b = ball.0 - postition.0;
-                let new_pos = postition.0.y + a_to_b.y.signum() * 0.;
+                let new_pos = postition.0.y + a_to_b.y.signum() * 1.4;
                 postition.0.y =
                     new_pos.clamp(0. + height.h / 2., GAME_H - height.h / 2.)
             }

@@ -13,16 +13,22 @@ mod gutters;
 mod input;
 mod paddles;
 mod reset;
+mod scoring;
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_plugins((board::plugin, input::plugin, reset::plugin))
-        .init_state::<Gameplay>()
-        .add_systems(
-            Update,
-            toggle_game_state
-                .run_if(input_just_pressed(KeyCode::Escape))
-                .in_set(UpdateSet::RecordInput),
-        );
+    app.add_plugins((
+        board::plugin,
+        input::plugin,
+        reset::plugin,
+        scoring::plugin,
+    ))
+    .init_state::<Gameplay>()
+    .add_systems(
+        Update,
+        toggle_game_state
+            .run_if(input_just_pressed(KeyCode::Escape))
+            .in_set(UpdateSet::RecordInput),
+    );
 }
 
 fn toggle_game_state(
