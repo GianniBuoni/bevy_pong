@@ -23,12 +23,11 @@ fn paddle_input(
         .iter_mut()
         .for_each(|(mut postition, paddle, height)| match paddle {
             PaddleType::Ai => {
-                if let Ok(ball) = ball.get_single() {
-                    let a_to_b = ball.0 - postition.0;
-                    let new_pos = postition.0.y + a_to_b.y.signum() * 2.;
-                    postition.0.y = new_pos
-                        .clamp(0. + height.h / 2., GAME_H - height.h / 2.)
-                }
+                let ball = get_single!(ball);
+                let a_to_b = ball.0 - postition.0;
+                let new_pos = postition.0.y + a_to_b.y.signum() * 0.;
+                postition.0.y =
+                    new_pos.clamp(0. + height.h / 2., GAME_H - height.h / 2.)
             }
             PaddleType::Player => {
                 let up: f32 = if kb_input.any_pressed([

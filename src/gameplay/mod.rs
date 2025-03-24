@@ -12,9 +12,10 @@ mod board;
 mod gutters;
 mod input;
 mod paddles;
+mod reset;
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_plugins((board::plugin, input::plugin))
+    app.add_plugins((board::plugin, input::plugin, reset::plugin))
         .init_state::<Gameplay>()
         .add_systems(
             Update,

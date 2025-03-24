@@ -19,6 +19,7 @@ macro_rules! get_single {
         }
     };
 }
+pub(crate) use crate::get_single;
 
 // global enum update sets
 #[derive(SystemSet, Clone, Copy, Debug, Hash, PartialEq, Eq)]

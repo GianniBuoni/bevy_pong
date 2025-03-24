@@ -38,7 +38,8 @@ pub fn spawn_board(world: &mut World) {
     }
     .apply(world);
 
-    SpawnBall.apply(world);
+    let direction: f32 = if rand::random_bool(0.5) { 1. } else { -1. };
+    SpawnBall { direction }.apply(world);
 }
 
 fn init_game(mut query: Query<(&mut Transform, &ZIndex), Added<ZIndex>>) {

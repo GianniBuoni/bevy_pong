@@ -10,16 +10,18 @@ fn spawn_bg(
 
     commands.spawn((
         Name::new("Background"),
+        BG,
         Position(Vec2::new(GAME_W / 2., GAME_H / 2.)),
+        RigidBody::Static,
         Mesh2d(shape.clone()),
         MeshMaterial2d(color.clone()),
         StateScoped(Screen::Game),
-        RigidBody::Static,
-        Collider::rectangle(GAME_W, GAME_H),
-        Sensor,
-        ZIndex(0),
+        ZIndex(-1),
     ));
 }
+
+#[derive(Component)]
+pub(super) struct BG;
 
 pub(super) struct SpawnBg;
 
