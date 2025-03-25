@@ -10,7 +10,9 @@ pub(super) fn plugin(app: &mut App) {
 }
 
 fn spawn_scoreboard(mut commands: Commands) {
-    // TODO dividing dashed line
+    for n in (3..GAME_H as i32).rev().step_by(17) {
+        commands.queue(SpawnDashLine { y: n as f32 });
+    }
     let mut root = commands.ui_root_row();
 
     root.with_children(|children| {
@@ -68,4 +70,32 @@ fn add_score(builder: &mut ChildBuilder, score: impl Component) {
             TextColor::WHITE,
         ));
     });
+}
+
+fn spawn_dashed_line(
+    In(config): In<SpawnDashLine>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+    mut command: Commands,
+) {
+    let shape = meshes.add(Rectangle::new(2., 10.));
+    let color = materials.add(Color::WHITE);
+    command.spawn((
+        Position::new(Vec2::new(GAME_W / 2., config.y - 10.)),
+        RigidBody::Static,
+        Mesh2d(shape),
+        MeshMaterial2d(color),
+        StateScoped(Screen::Game),
+        ZIndex(1),
+    ));
+}
+
+struct SpawnDashLine {
+    y: f32,
+}
+
+impl Command for SpawnDashLine {
+    fn apply(self, world: &mut World) {
+        let _ = world.run_system_cached_with(spawn_dashed_line, self);
+    }
 }

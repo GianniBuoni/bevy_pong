@@ -21,8 +21,6 @@ fn record_score(In(config): In<RecordScore>, mut score: ResMut<Scores>) {
         PaddleType::Player => score.player += 1,
         PaddleType::Ai => score.ai += 1,
     }
-    println!("player : {}", score.player);
-    println!("ai : {}", score.ai);
 }
 
 impl Command for RecordScore {
