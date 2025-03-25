@@ -8,6 +8,7 @@ pub(crate) mod prelude {
 
 use crate::prelude::*;
 mod interactions;
+mod palette;
 mod ui_components;
 
 pub(super) fn plugin(app: &mut App) {

@@ -5,6 +5,7 @@ pub(super) fn plugin(app: &mut App) {
     app.init_state::<Gameplay>();
     app.add_observer(pause_game_state);
     app.add_observer(unpause_game_state);
+    app.enable_state_scoped_entities::<Gameplay>();
     app.add_systems(
         Update,
         toggle_game_state
@@ -25,7 +26,7 @@ fn toggle_game_state(current: Res<State<Gameplay>>, mut commands: Commands) {
 }
 
 #[derive(States, Clone, Debug, Default, Hash, PartialEq, Eq)]
-pub(super) enum Gameplay {
+pub enum Gameplay {
     #[default]
     InPlay,
     Paused,
