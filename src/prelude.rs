@@ -33,7 +33,6 @@ macro_rules! get_single_mut {
     };
 }
 
-#[allow(unused_imports)]
 pub(crate) use crate::get_single_mut;
 
 // global enum update sets

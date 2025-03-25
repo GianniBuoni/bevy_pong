@@ -3,6 +3,7 @@
 
 pub(crate) mod prelude {
     pub(crate) use super::interactions::OnClick;
+    pub(crate) use super::ui_components::{UIComponent, UIContainer};
 }
 
 use crate::prelude::*;

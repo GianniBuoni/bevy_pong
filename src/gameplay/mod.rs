@@ -12,6 +12,7 @@ mod input;
 mod paddles;
 mod pause;
 mod reset;
+mod scoreboard;
 mod scoring;
 
 pub(super) fn plugin(app: &mut App) {
@@ -21,6 +22,7 @@ pub(super) fn plugin(app: &mut App) {
         input::plugin,
         pause::plugin,
         reset::plugin,
+        scoreboard::plugin,
         scoring::plugin,
     ));
 }

@@ -5,6 +5,7 @@ use super::{
     bg::SpawnBg,
     gutters::{GuttersSide, SpawnGutter},
     paddles::{PaddleType, SpawnPaddle},
+    scoreboard::SpawnScoreboard,
 };
 
 pub(super) fn plugin(app: &mut App) {
@@ -37,6 +38,8 @@ pub fn spawn_board(world: &mut World) {
         side: GuttersSide::Bottom,
     }
     .apply(world);
+
+    SpawnScoreboard.apply(world);
 
     let direction: f32 = if rand::random_bool(0.5) { 1. } else { -1. };
     SpawnBall { direction }.apply(world);
