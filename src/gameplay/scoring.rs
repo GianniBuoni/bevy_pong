@@ -7,7 +7,7 @@ pub(super) fn plugin(app: &mut App) {
 }
 
 #[derive(Resource, Default)]
-pub(super) struct Scores {
+pub struct Scores {
     pub player: u32,
     pub ai: u32,
 }

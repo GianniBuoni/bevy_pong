@@ -14,7 +14,10 @@ pub(super) fn plugin(app: &mut App) {
     );
 }
 
-fn toggle_game_state(current: Res<State<Gameplay>>, mut commands: Commands) {
+pub fn toggle_game_state(
+    current: Res<State<Gameplay>>,
+    mut commands: Commands,
+) {
     match current.get() {
         Gameplay::InPlay => {
             commands.trigger(PauseEvent);

@@ -9,7 +9,7 @@ use super::{
 };
 
 pub(super) fn plugin(app: &mut App) {
-    app.add_systems(Startup, init_game);
+    app.add_systems(Update, assign_z.run_if(in_state(Gameplay::InPlay)));
 }
 
 pub fn spawn_board(world: &mut World) {
@@ -45,7 +45,7 @@ pub fn spawn_board(world: &mut World) {
     SpawnBall { direction }.apply(world);
 }
 
-fn init_game(mut query: Query<(&mut Transform, &ZIndex), Added<ZIndex>>) {
+fn assign_z(mut query: Query<(&mut Transform, &ZIndex), Added<ZIndex>>) {
     for (mut transform, z_index) in &mut query {
         transform.translation.z = z_index.0 as f32;
     }

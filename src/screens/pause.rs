@@ -10,7 +10,8 @@ fn spawn_pause_screen(mut commands: Commands) {
         .with_children(|children| {
             children.header("PAUSED");
             children.button("Resume").observe(resume);
-            children.button("Quit").observe(quit);
+            children.button("Main Menu").observe(main_menu);
+            children.button("Quit").observe(super::quit);
         })
         .insert((
             StateScoped(Gameplay::Paused),
@@ -20,10 +21,17 @@ fn spawn_pause_screen(mut commands: Commands) {
 }
 
 // BUTTON EVENTS
-fn resume(_trigger: Trigger<OnClick>, mut next: ResMut<NextState<Gameplay>>) {
-    next.set(Gameplay::InPlay);
+fn resume(_trigger: Trigger<OnClick>, mut commands: Commands) {
+    commands.run_system_cached(toggle_game_state);
 }
 
-fn quit(_trigger: Trigger<OnClick>, mut app_exit: EventWriter<AppExit>) {
-    app_exit.send(AppExit::Success);
+fn main_menu(
+    _trigger: Trigger<OnClick>,
+    mut next: ResMut<NextState<Screen>>,
+    mut scores: ResMut<Scores>,
+    mut commands: Commands,
+) {
+    commands.run_system_cached(toggle_game_state);
+    next.set(Screen::Title);
+    *scores = Scores::default();
 }

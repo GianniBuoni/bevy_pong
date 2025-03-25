@@ -2,7 +2,8 @@ use crate::prelude::*;
 
 pub(crate) mod prelude {
     pub(crate) use super::board::spawn_board;
-    pub(crate) use super::pause::Gameplay;
+    pub(crate) use super::pause::{toggle_game_state, Gameplay};
+    pub(crate) use super::scoring::Scores;
 }
 
 mod ball;
