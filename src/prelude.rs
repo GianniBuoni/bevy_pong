@@ -4,6 +4,8 @@ pub(crate) use bevy::prelude::*;
 // module preludes
 pub(crate) use crate::gameplay::prelude::*;
 pub(crate) use crate::screens::prelude::*;
+#[allow(unused_imports)]
+pub(crate) use crate::theming::prelude::*;
 
 // global constatns
 pub(crate) const GAME_W: f32 = 640.;

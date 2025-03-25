@@ -5,6 +5,7 @@ mod gameplay;
 mod physics;
 mod prelude;
 mod screens;
+mod theming;
 
 pub struct AppPlugin;
 
@@ -32,7 +33,12 @@ impl bevy::app::Plugin for AppPlugin {
                 })
                 .set(ImagePlugin::default_nearest()),
         );
-        app.add_plugins((gameplay::plugin, physics::plugin, screens::plugin));
+        app.add_plugins((
+            gameplay::plugin,
+            physics::plugin,
+            screens::plugin,
+            theming::plugin,
+        ));
     }
 }
 
