@@ -1,4 +1,5 @@
 use bevy::render::camera::ScalingMode::AutoMin;
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 use crate::prelude::*;
 mod gameplay;
@@ -33,6 +34,8 @@ impl bevy::app::Plugin for AppPlugin {
                 })
                 .set(ImagePlugin::default_nearest()),
         );
+        #[cfg(debug_assertions)]
+        app.add_plugins(WorldInspectorPlugin::new());
         app.add_plugins((
             gameplay::plugin,
             physics::plugin,
