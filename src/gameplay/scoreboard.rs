@@ -7,6 +7,7 @@ pub(super) fn plugin(app: &mut App) {
         PostUpdate,
         update_scoreboard.run_if(resource_exists::<Scores>),
     );
+    app.init_resource::<DashAssets>();
 }
 
 fn spawn_scoreboard(mut commands: Commands) {
@@ -72,19 +73,33 @@ fn add_score(builder: &mut ChildBuilder, score: impl Component) {
     });
 }
 
+#[derive(Resource, Asset, Reflect, Clone)]
+struct DashAssets {
+    mesh: Handle<Mesh>,
+    material: Handle<ColorMaterial>,
+}
+
+impl FromWorld for DashAssets {
+    fn from_world(world: &mut World) -> Self {
+        let assets = world.resource::<AssetServer>();
+        Self {
+            mesh: assets.add(Rectangle::new(2., 10.).into()),
+            material: assets.add(Color::WHITE.into()),
+        }
+    }
+}
+
 fn spawn_dashed_line(
     In(config): In<SpawnDashLine>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
+    dash_asset: Res<DashAssets>,
     mut command: Commands,
 ) {
-    let shape = meshes.add(Rectangle::new(2., 10.));
-    let color = materials.add(Color::WHITE);
     command.spawn((
+        Name::new("Midcourt Dash"),
         Position::new(Vec2::new(GAME_W / 2., config.y - 10.)),
         RigidBody::Static,
-        Mesh2d(shape),
-        MeshMaterial2d(color),
+        Mesh2d(dash_asset.mesh.clone()),
+        MeshMaterial2d(dash_asset.material.clone()),
         StateScoped(Screen::Game),
         ZIndex(1),
     ));

@@ -1,4 +1,5 @@
 use bevy::render::camera::ScalingMode::AutoMin;
+#[cfg(debug_assertions)]
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 use crate::prelude::*;
